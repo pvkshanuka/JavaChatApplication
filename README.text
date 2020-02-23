@@ -1,0 +1,19 @@
+keytool commands.
+
+1)
+keytool -genkey -keyalg RSA -keysize 2048 -validity 360 -alias chatkey -keystore ChatKeyStore.jks
+
+2)
+keytool -export -alias chatkey -keystore ChatKeyStore.jks -file chatkey.cert
+
+3)
+keytool -import -file chatkey.cert -alias mykey -keystore ChatTrustStore.jts
+
+
+commands to run.
+
+to run server create class file and then run it using this command.
+java -Djavax.net.debug=ssl JavaChatServer
+
+to run client create class file and then run it using this command.
+java -Djavax.net.debug=ssl JavaChatClient

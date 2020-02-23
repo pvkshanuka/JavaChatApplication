@@ -1,10 +1,16 @@
+import com.sun.net.ssl.internal.ssl.Provider;
+
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLServerSocketFactory;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.BindException;
 import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.Security;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -20,7 +26,7 @@ public class JavaChatServer {
 
     PrintWriter printWriter;
     BufferedReader bufferedReader;
-    ServerSocket serverSocket;
+    SSLServerSocket serverSocket;
     String receive, send, txt, line;
     Pattern pattern;
     Matcher matcher;
@@ -29,6 +35,11 @@ public class JavaChatServer {
 
 
     public static void main(String[] args) {
+
+        Security.addProvider(new Provider());
+        System.setProperty("javax.net.ssl.keyStore", "ChatKeyStore.jks");
+        System.setProperty("javax.net.ssl.keyStorePassword", "123456");
+//        System.setProperty("javax.net.debug","all");
 
         scanner = new Scanner(System.in);
         clientMap = new HashMap<String, SocketThread>();
@@ -63,35 +74,37 @@ public class JavaChatServer {
             if (matcher.find()) {
 
                 port = Integer.parseInt(matcher.group(2));
+                try {
+                    serverSocket = (SSLServerSocket) SSLServerSocketFactory.getDefault().createServerSocket(port);
 
-                serverSocket = new ServerSocket(port);
+                    bufferedReader = new BufferedReader(new InputStreamReader(Runtime.getRuntime().exec("ifconfig").getInputStream()));
 
-                bufferedReader = new BufferedReader(new InputStreamReader(Runtime.getRuntime().exec("ifconfig").getInputStream()));
+                    txt = "";
 
-                txt = "";
+                    while ((txt = bufferedReader.readLine()) != null) {
 
-                while ((txt = bufferedReader.readLine()) != null) {
-
-                    if (txt.contains("inet ")) {
+                        if (txt.contains("inet ")) {
 //                        System.out.println(txt);
-                        pattern = Pattern.compile("(inet).(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b)");
-                        matcher = pattern.matcher(txt);
-                        if (matcher.find()) {
-                            serverIP = matcher.group(2);
+                            pattern = Pattern.compile("(inet).(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b)");
+                            matcher = pattern.matcher(txt);
+                            if (matcher.find()) {
+                                serverIP = matcher.group(2);
 
-                            break;
+                                break;
 
-                        } else {
-                            System.out.println("Failed to get server IP address.\n");
+                            } else {
+                                System.out.println("Failed to get server IP address.\n");
+                            }
+
                         }
-
                     }
+
+                    System.out.println("\nServer started.\nClients can connect from below command\n'connect " + serverIP + ":" + port + " as ClientName'\n");
+
+                    b = false;
+                } catch (BindException e) {
+                    System.out.println("Please select another port\n");
                 }
-
-                System.out.println("\nServer started.\nClients can connect from below command\n'connect " + serverIP + ":" + port + " as ClientName'\n");
-
-                b = false;
-
             } else {
                 System.out.println("Invalid command.\n");
             }
@@ -178,10 +191,10 @@ class SocketThread extends Thread {
                                     System.out.println(clientName + " to " + sendSocket.clientName);
                                     if (sendSocket.printWriter == null) {
                                         sendSocket.printWriter = new PrintWriter(sendSocket.socket.getOutputStream(), true);
-                                        sendSocket.printWriter.println(clientName+": "+matcher.group(1));
+                                        sendSocket.printWriter.println(clientName + ": " + matcher.group(1));
                                         sendSocket.printWriter.flush();
                                     } else {
-                                        sendSocket.printWriter.println(clientName+": "+matcher.group(1));
+                                        sendSocket.printWriter.println(clientName + ": " + matcher.group(1));
                                         sendSocket.printWriter.flush();
                                     }
 //                                    send = "/\n";

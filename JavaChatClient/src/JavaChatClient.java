@@ -1,10 +1,13 @@
+import com.sun.net.ssl.internal.ssl.Provider;
+
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ConnectException;
-import java.net.Socket;
-import java.net.SocketException;
+import java.security.Security;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,7 +15,7 @@ import java.util.regex.Pattern;
 public class JavaChatClient {
 
     public static JavaChatClient javaChatClient;
-    public static Socket socket;
+    public static SSLSocket socket;
     public static String serverIP, serverPort;
 
     Scanner scanner;
@@ -25,6 +28,11 @@ public class JavaChatClient {
     boolean b;
 
     public static void main(String[] args) {
+
+        Security.addProvider(new Provider());
+        System.setProperty("javax.net.ssl.trustStore", "ChatTrustStore.jts");
+        System.setProperty("javax.net.ssl.trustStorePassword", "123456");
+//        System.setProperty("javax.net.debug","all");
 
         javaChatClient = new JavaChatClient();
 
@@ -57,7 +65,8 @@ public class JavaChatClient {
 
                     if (socket == null) {
 
-                        socket = new Socket(matcher.group(2), Integer.parseInt(matcher.group(3)));
+                        socket = (SSLSocket) SSLSocketFactory.getDefault().createSocket(matcher.group(2), Integer.parseInt(matcher.group(3)));
+//                        socket = new Socket(matcher.group(2), Integer.parseInt(matcher.group(3)));
                         name = matcher.group(5);
 
                         send = "name=" + name + " ";
@@ -81,7 +90,9 @@ public class JavaChatClient {
                                     try {
                                         line = "";
                                         while ((line = bufferedReader.readLine()) != null) {
-                                            System.out.println(line);
+                                            if (!line.contains("Thread-0, ")) {
+                                                System.out.println(line);
+                                            }
                                         }
 
 

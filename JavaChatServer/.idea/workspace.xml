@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0b49427f-ec85-43e9-be5c-c8197723174d" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Y7ck16i97xqCR9nWukAKjfSeER" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="restartRequiresConfirmation" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="JavaChatServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="JavaChatServer" />
+      <module name="JavaChatServer" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.JavaChatServer" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0b49427f-ec85-43e9-be5c-c8197723174d" name="Default Changelist" comment="" />
+      <created>1582297212213</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582297212213</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="313" y="59" width="800" height="684" key="#Project_Structure" timestamp="1582297244200">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state x="313" y="59" width="800" height="684" key="#Project_Structure/70.27.1296.741@70.27.1296.741" timestamp="1582297244200" />
+    <state x="390" y="202" width="646" height="397" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1582387195444">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state x="390" y="202" width="646" height="397" key="#com.intellij.fileTypes.FileTypeChooser/70.27.1296.741@70.27.1296.741" timestamp="1582387195444" />
+    <state x="526" y="109" width="374" height="584" key="#com.intellij.ide.util.MemberChooser" timestamp="1582355788801">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state x="526" y="109" width="374" height="584" key="#com.intellij.ide.util.MemberChooser/70.27.1296.741@70.27.1296.741" timestamp="1582355788801" />
+    <state width="1250" height="111" key="GridCell.Tab.0.bottom" timestamp="1582389187086">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state width="1250" height="111" key="GridCell.Tab.0.bottom/70.27.1296.741@70.27.1296.741" timestamp="1582389187086" />
+    <state width="1250" height="111" key="GridCell.Tab.0.center" timestamp="1582389187085">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state width="1250" height="111" key="GridCell.Tab.0.center/70.27.1296.741@70.27.1296.741" timestamp="1582389187085" />
+    <state width="1250" height="111" key="GridCell.Tab.0.left" timestamp="1582389187085">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state width="1250" height="111" key="GridCell.Tab.0.left/70.27.1296.741@70.27.1296.741" timestamp="1582389187085" />
+    <state width="1250" height="111" key="GridCell.Tab.0.right" timestamp="1582389187086">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state width="1250" height="111" key="GridCell.Tab.0.right/70.27.1296.741@70.27.1296.741" timestamp="1582389187086" />
+    <state width="1250" height="215" key="GridCell.Tab.1.bottom" timestamp="1582361043519">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state width="1250" height="215" key="GridCell.Tab.1.bottom/70.27.1296.741@70.27.1296.741" timestamp="1582361043519" />
+    <state width="1250" height="215" key="GridCell.Tab.1.center" timestamp="1582361043519">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state width="1250" height="215" key="GridCell.Tab.1.center/70.27.1296.741@70.27.1296.741" timestamp="1582361043519" />
+    <state width="1250" height="215" key="GridCell.Tab.1.left" timestamp="1582361043518">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state width="1250" height="215" key="GridCell.Tab.1.left/70.27.1296.741@70.27.1296.741" timestamp="1582361043518" />
+    <state width="1250" height="215" key="GridCell.Tab.1.right" timestamp="1582361043519">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state width="1250" height="215" key="GridCell.Tab.1.right/70.27.1296.741@70.27.1296.741" timestamp="1582361043519" />
+    <state x="371" y="27" width="683" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1582359344583">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state x="371" y="27" width="683" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/70.27.1296.741@70.27.1296.741" timestamp="1582359344583" />
+    <state x="70" y="27" width="1286" height="741" key="new project wizard" timestamp="1582383079011">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state x="70" y="27" width="1286" height="741" key="new project wizard/70.27.1296.741@70.27.1296.741" timestamp="1582383079011" />
+    <state x="382" y="174" key="run.anything.popup" timestamp="1582298944220">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state x="382" y="174" key="run.anything.popup/70.27.1296.741@70.27.1296.741" timestamp="1582298944220" />
+  </component>
+</project>
