@@ -4,35 +4,146 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class JavaHttpChatClient {
+
     private static final String USER_AGENT = "Mozilla/5.0";
 
-    private static final String GET_URL = "http://172.17.0.1:1234/?name=kusal&age=24";
+    private static String POST_URL = "";
 
-    private static final String POST_URL = "https://localhost:9090/SpringMVCExample/home";
+    private static String POST_PARAMS = "";
 
-    private static final String POST_PARAMS = "userName=Pankaj";
+    private static Scanner scanner;
+
+    private static String txt, name;
+    private static Pattern pattern;
+    private static Matcher matcher;
 
     public static void main(String[] args) {
         try {
-            sendGET();
-            System.out.println("GET DONE");
-//            sendPOST();
-            System.out.println("POST DONE");
+
+            connectToServer();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void sendGET() throws IOException {
-        URL obj = new URL(GET_URL);
+    private static void connectToServer() throws IOException {
+
+        boolean isConnected = false;
+
+        scanner = new Scanner(System.in);
+
+        while (!isConnected) {
+
+            System.out.println("Please connect to serve using below command\n'connect 000.000.000.000:0000 as YourName'");
+
+            txt = scanner.nextLine();
+
+            pattern = Pattern.compile("(^connect)\\s(\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b):(\\b\\d{4}\\b)\\s(\\bas\\b)\\s(\\b[A-Za-z]{3,15})$");
+            matcher = pattern.matcher(txt);
+
+            if (matcher.find()) {
+
+                name = matcher.group(5);
+
+                POST_PARAMS = "name=" + matcher.group(5);
+
+                POST_URL = "http://" + matcher.group(2) + ":" + matcher.group(3);
+
+                sendPOST(POST_PARAMS);
+
+                isConnected = true;
+
+            } else {
+                System.out.println("Invalid command\n");
+            }
+
+        }
+
+
+        startResponseListener();
+
+        startCommandListener();
+
+    }
+
+    private static void startCommandListener() throws IOException {
+        boolean isContinue = true;
+
+        while (isContinue) {
+
+            txt = scanner.nextLine();
+
+            if ("list".equals(txt)) {
+
+                POST_PARAMS = "name=" + name + ",cmd=list";
+                sendPOST(POST_PARAMS);
+
+            } else if ("exit".equals(txt)) {
+
+                POST_PARAMS = "name=" + name + ",cmd=exit";
+                sendPOST(POST_PARAMS);
+                isContinue = false;
+                System.exit(0);
+            } else {
+
+                pattern = Pattern.compile("(^.{0,}\\b)\\s(\\bto)\\s(\\b[A-Za-z]{3,15}\\b)");
+                matcher = pattern.matcher(txt);
+                if (matcher.find()) {
+
+                    POST_PARAMS = "name=" + name + ",msg=" + matcher.group(1) + ",to=" + matcher.group(3);
+                    sendPOST(POST_PARAMS);
+
+                } else {
+                    System.out.println("Invalid command.\n");
+                }
+            }
+        }
+    }
+
+    private static void startResponseListener() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    while (true) {
+
+                        Thread.sleep(2000);
+
+                        sendPOST("name=" + name + ",cmd=check");
+
+                    }
+                } catch (InterruptedException | IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+
+    }
+
+    private static void sendPOST(String params) throws IOException {
+        URL obj = new URL(POST_URL);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("GET");
+        con.setRequestMethod("POST");
         con.setRequestProperty("User-Agent", USER_AGENT);
+
+        con.setDoOutput(true);
+        OutputStream os = con.getOutputStream();
+        os.write(params.getBytes());
+        os.flush();
+        os.close();
+
         int responseCode = con.getResponseCode();
-        System.out.println("GET Response Code :: " + responseCode);
-        if (responseCode == HttpURLConnection.HTTP_OK) { // success
+
+        if (responseCode == HttpURLConnection.HTTP_OK) { //success
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     con.getInputStream()));
             String inputLine;
@@ -43,46 +154,14 @@ public class JavaHttpChatClient {
             }
             in.close();
 
-            // print result
-            System.out.println(response.toString());
+            if (response.toString().length() > 0) {
+                System.out.println(response.toString().replace(",", "\n"));
+                if ("[Server] : Invalid client name".equals(response.toString())) {
+                    connectToServer();
+                }
+            }
         } else {
-            System.out.println("GET request not worked");
+            System.out.println("POST request not worked");
         }
-
     }
-
-//    private static void sendPOST() throws IOException {
-//        URL obj = new URL(POST_URL);
-//        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-//        con.setRequestMethod("POST");
-//        con.setRequestProperty("User-Agent", USER_AGENT);
-//
-//        // For POST only - START
-//        con.setDoOutput(true);
-//        OutputStream os = con.getOutputStream();
-//        os.write(POST_PARAMS.getBytes());
-//        os.flush();
-//        os.close();
-//        // For POST only - END
-//
-//        int responseCode = con.getResponseCode();
-//        System.out.println("POST Response Code :: " + responseCode);
-//
-//        if (responseCode == HttpURLConnection.HTTP_OK) { //success
-//            BufferedReader in = new BufferedReader(new InputStreamReader(
-//                    con.getInputStream()));
-//            String inputLine;
-//            StringBuffer response = new StringBuffer();
-//
-//            while ((inputLine = in.readLine()) != null) {
-//                response.append(inputLine);
-//            }
-//            in.close();
-//
-//            // print result
-//            System.out.println(response.toString());
-//        } else {
-//            System.out.println("POST request not worked");
-//        }
-//    }
 }
