@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b49427f-ec85-43e9-be5c-c8197723174d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../JavaChatClient/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../JavaHttpChatClient/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../JavaHttpChatServer/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../JavaChatClient/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaChatClient/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../JavaHttpChatClient/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaHttpChatClient/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaHttpChatClient/out/production/JavaHttpChatClient/JavaHttpChatClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaHttpChatClient/out/production/JavaHttpChatClient/JavaHttpChatClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaHttpChatClient/src/JavaHttpChatClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaHttpChatClient/src/JavaHttpChatClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../JavaHttpChatServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaHttpChatServer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaHttpChatServer/out/production/JavaHttpChatServer/JavaHttpChatServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaHttpChatServer/out/production/JavaHttpChatServer/JavaHttpChatServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaHttpChatServer/src/JavaHttpChatServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaHttpChatServer/src/JavaHttpChatServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
