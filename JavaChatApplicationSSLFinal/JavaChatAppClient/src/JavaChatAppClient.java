@@ -25,7 +25,7 @@ public class JavaChatAppClient {
     private Pattern patternParam = Pattern.compile("(^[a-zA-Z]*\\b)=(.*)");
     //    private static Map<String, ChatMessages> mapClients = new HashMap<>();
     private Integer port;
-    private BufferedReader bufferedReader;
+    private static BufferedReader bufferedReader;
 
 
     private final String USER_AGENT = "Mozilla/5.0";
@@ -39,6 +39,31 @@ public class JavaChatAppClient {
     private Pattern pattern2;
     private Matcher matcher;
     private Matcher matcher2;
+
+
+    static {
+
+        javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(
+                new javax.net.ssl.HostnameVerifier() {
+
+                    public boolean verify(String hostname,
+                                          javax.net.ssl.SSLSession sslSession) {
+
+
+                        try {
+                            if (hostname.equals(getIp())) {
+                                return true;
+                            }
+                        } catch (IOException e) {
+                            System.out.println("Unable to get IP");
+                        }
+
+                        System.out.println(hostname+" >>>>>");
+                        return false;
+                    }
+                });
+
+    }
 
 
     public static void main(String[] args) {
@@ -70,6 +95,7 @@ public class JavaChatAppClient {
 
         } catch (IOException e) {
             e.printStackTrace();
+
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (CertificateException e) {
@@ -85,17 +111,17 @@ public class JavaChatAppClient {
 
     private void startSender() {
 
-        javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(
-                new javax.net.ssl.HostnameVerifier() {
-
-                    public boolean verify(String hostname,
-                                          javax.net.ssl.SSLSession sslSession) {
-                        if (hostname.equals(port)) {
-                            return true;
-                        }
-                        return false;
-                    }
-                });
+//        javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(
+//                new javax.net.ssl.HostnameVerifier() {
+//
+//                    public boolean verify(String hostname,
+//                                          javax.net.ssl.SSLSession sslSession) {
+//                        if (hostname.equals(1212)) {
+//                            return true;
+//                        }
+//                        return false;
+//                    }
+//                });
 
 
         //        Security.addProvider(new Provider());
@@ -196,7 +222,7 @@ public class JavaChatAppClient {
 
     }
 
-    private String getIp() throws IOException {
+    private static String getIp() throws IOException {
 
         bufferedReader = new BufferedReader(new InputStreamReader(Runtime.getRuntime().exec("ifconfig").getInputStream()));
 
